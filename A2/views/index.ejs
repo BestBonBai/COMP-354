@@ -15,10 +15,15 @@
 <div id="toolbar"></div>
 <div id="editor"></div>
 
+<button id="saveText">Save</button>
 <script>
     var toolbarOptions = [
         ['bold', 'italic', 'underline', 'strike'],
-        ['blockquote', 'code-block']
+        ['blockquote', 'code-block'],
+        [{ 'list': 'ordered'}, { 'list': 'bullet'}],
+        [{ 'color': [] }, { 'background': [] }],
+        [{ 'font': []}]
+
     ]
 var options = {
   debug: 'info',
@@ -29,6 +34,11 @@ var options = {
   theme: 'snow'
 };
 var editor = new Quill('#editor', options);
+
+$('#saveText').click(function() {
+  window.delta = editor.getContents();
+  console.log(window.delta)
+});
     
 </script>
 </body>
