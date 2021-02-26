@@ -1,0 +1,43 @@
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+
+<style>
+#content-container {
+    width: auto;
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#editor-container {
+    height: 500px;
+}
+</style>
+
+<script>  
+    $(document).ready(function(){
+        var options = {
+            debug: 'info',
+            modules: {
+                toolbar: '#toolbar-container'
+            },
+            placeholder: 'Compose an epic...',
+            theme: 'snow'
+        };
+                
+        var editor = new Quill('#editor-container', options);
+            
+        // Enable all tooptips
+        // $('[data-toggle="tooltip"]').tooltip();
+
+        // Can control programmatically too
+        $('.ql-italic').mouseover();
+        setTimeout(function() {
+            $('.ql-italic').mouseout();
+            }, 1500);
+        });
+
+</script> 
