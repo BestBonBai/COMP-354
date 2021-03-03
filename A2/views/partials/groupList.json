@@ -1,0 +1,24 @@
+{
+    "group": {
+        "city": [
+            { "name": "Montreal" },
+            { "name": "Torontor" },
+            { "name": "Brossard" },
+            { "name": "Shanghai" }
+        ],
+        "fruit": [
+            { "name": "apple" },
+            { "name": "orange" },
+            { "name": "banana" }
+        ],
+        "color": [
+            { "name": "red" },
+            { "name": "blue" },
+            { "name": "green" },
+            { "name": "yellow" },
+            { "name": "white" },
+            { "name": "black" }
+        ]
+    }
+
+}

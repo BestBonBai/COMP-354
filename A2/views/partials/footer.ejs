@@ -1,6 +1,6 @@
-<script src="js/jquery.min.js"></script>
-<script src="js/popper.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
 
 <style>
@@ -18,26 +18,41 @@
 </style>
 
 <script>  
+    
     $(document).ready(function(){
+        // import counter class
+        <%- include('counter.js'); %>
+        // import showGroup class
+        <%- include('showGroup.js'); %>
+
+        //import GroupList JSON file for dectecting if word belongs to group
+        var groupDictionary = JSON.parse('<%- JSON.stringify('groupList.json')%>');
+        console.log(groupDictionary);
+
         var options = {
             debug: 'info',
             modules: {
-                toolbar: '#toolbar-container'
+                toolbar: '#toolbar-container',
+                counter: {
+                    container: '#counter',
+                    unit: 'word'
+                },
+                showgroup: {
+                    container: '#showgroup',
+                    display: 'group'
+                    
+                }
             },
             placeholder: 'Compose an epic...',
             theme: 'snow'
         };
-                
+               
         var editor = new Quill('#editor-container', options);
             
         // Enable all tooptips
         // $('[data-toggle="tooltip"]').tooltip();
 
-        // Can control programmatically too
-        $('.ql-italic').mouseover();
-        setTimeout(function() {
-            $('.ql-italic').mouseout();
-            }, 1500);
-        });
+        
+    });
 
 </script> 
