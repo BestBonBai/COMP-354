@@ -1,38 +1,67 @@
-<div id="content-container">
+<div class="container">
+    <div class="row">
+        <div class="col-2">
+            <ul class="list-group text-center">
+                <li class="list-group-item list-group-item-secondary">Edits Menu</li>
+                <li class="list-group-item btn" type="button" data-toggle="collapse" data-target="#edits-content" aria-expanded="false" aria-controls="collapseExample">
+                    Edits
+                    <div class="collapse" id="edits-content">
+                        <div class="card card-body">
+                          add something here.
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item btn" type="button" data-toggle="collapse" data-target="#group-content" aria-expanded="false" aria-controls="collapseExample">
+                    Group
+                    <div class="collapse" id="group-content">
+                        <div class="card card-body">
+                                Group 1
+                                Group 2
+                                Group 3
+                                Group 4
+                                Group 5
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
 
-    <div id="toolbar-container">
-        <select class="ql-size" data-toggle="tooltip" data-placement="top" title="Change font size">
-            <!-- Add font size dropdown -->
-            <option value="small"></option>
-            <option value="normal" selected></option>
-            <option value="large"></option>
-            <option value="huge"></option>
-        </select>
-        <select class="ql-font" data-toggle="tooltip" data-placement="top" title="Change font">
-            <!-- Add font dropdown -->
-            <option value="sans"></option>
-            <option value="serif" selected></option>
-            <option value="monospace"></option>
-            
-        </select>
-        <button class="ql-bold" data-toggle="tooltip" data-placement="top" title="Bold"></button>
-        <button class="ql-italic" data-toggle="tooltip" data-placement="top" title="Add italic text"></button>
-        <button class="ql-underline" data-toggle="tooltip" data-placement="top" title="Underline"></button>
-        <button class="ql-strike" data-toggle="tooltip" data-placement="top" title="StrikeThrough"></button>
-        <button class="ql-blockquote" data-toggle="tooltip" data-placement="top" title="Blockquote"></button>
-        <button class="ql-code-block" data-toggle="tooltip" data-placement="top" title="Code Block"></button>
-        <button class="ql-list" value="ordered" data-toggle="tooltip" data-placement="top" title="Order List"></button>
-        <button class="ql-list" value="bullet" data-toggle="tooltip" data-placement="top" title="Bullet List"></button>
-        <button class="ql-color" value="red" data-toggle="tooltip" data-placement="top" title="Change Color"></button>
-        <button class="ql-background" value="blue" data-toggle="tooltip" data-placement="top" title="Change Background"></button>
-    
+    <div id="content-container" class="col-10">
+
+        <div id="toolbar-container">
+            <select class="ql-size" data-toggle="tooltip" data-placement="top" title="Change font size">
+                <!-- Add font size dropdown -->
+                <option value="small"></option>
+                <option value="normal" selected></option>
+                <option value="large"></option>
+                <option value="huge"></option>
+            </select>
+            <select class="ql-font" data-toggle="tooltip" data-placement="top" title="Change font">
+                <!-- Add font dropdown -->
+                <option value="sans"></option>
+                <option value="serif" selected></option>
+                <option value="monospace"></option>
+                
+            </select>
+            <button class="ql-bold" data-toggle="tooltip" data-placement="top" title="Bold"></button>
+            <button class="ql-italic" data-toggle="tooltip" data-placement="top" title="Add italic text"></button>
+            <button class="ql-underline" data-toggle="tooltip" data-placement="top" title="Underline"></button>
+            <button class="ql-strike" data-toggle="tooltip" data-placement="top" title="StrikeThrough"></button>
+            <button class="ql-blockquote" data-toggle="tooltip" data-placement="top" title="Blockquote"></button>
+            <button class="ql-code-block" data-toggle="tooltip" data-placement="top" title="Code Block"></button>
+            <button class="ql-list" value="ordered" data-toggle="tooltip" data-placement="top" title="Order List"></button>
+            <button class="ql-list" value="bullet" data-toggle="tooltip" data-placement="top" title="Bullet List"></button>
+            <button class="ql-color" value="red" data-toggle="tooltip" data-placement="top" title="Change Color"></button>
+            <button class="ql-background" value="blue" data-toggle="tooltip" data-placement="top" title="Change Background"></button>
+        
+        </div>
+        
+        <div id="editor-container">
+                    
+        </div>
+
+
+
     </div>
-    
-    <div id="editor-container">
-                  
     </div>
-
-
-
 </div>
-

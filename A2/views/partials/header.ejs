@@ -1,35 +1,46 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-blue">
-        <div class="container-fluid">
-
-            <button type="button" id="sidebarCollapse" class="btn btn-primary">
-              <i class="fa fa-bars"></i>
-              <span class="sr-only">Toggle Menu</span>
-            </button>
-            <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Open</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">New</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Undo</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Redo</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Save</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Download</a>
-                </li>
-              </ul>
-            </div>
-        </div>
+<nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand"></a>
 </nav>
+<nav class="navbar fixed-top navbar-expand-lg navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 mr-md-5 h1">Smart Undo Editor</span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item dropdown mr-md-4">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              File
+            </a>
+            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Open</a>
+              <a class="dropdown-item" href="#">Save</a>
+          </li>
+        <li class="nav-item dropdown mr-md-4">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Undo
+          </a>
+          <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Undo by group</a>
+            <a class="dropdown-item" href="#">Undo by timing</a>
+            <a class="dropdown-item" href="#">Undo different edits of different groups</a>
+        </li>
+        <li class="nav-item mr-md-3">
+            <a class="nav-link" href="#">Redo</a>
+        </li>
+        <li class="nav-item mr-md-3">
+            <a class="nav-link" href="#">Select specific edits</a>
+        </li>
+        <li class="nav-item dropdown mr-md-3">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Delete
+            </a>
+            <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Delete arbitrary list</a>
+              <a class="dropdown-item" href="#">Delete a complete group of edits</a>
+              <a class="dropdown-item" href="#">Delete all edits</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
