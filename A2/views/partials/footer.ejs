@@ -1,6 +1,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 <script src="js/main.js"></script>
 
 <style>
@@ -25,10 +26,6 @@
         // import showGroup class
         <%- include('showGroup.js'); %>
 
-        //import GroupList JSON file for dectecting if word belongs to group
-        var groupDictionary = JSON.parse('<%- JSON.stringify('groupList.json')%>');
-        console.log(groupDictionary);
-
         var options = {
             debug: 'info',
             modules: {
@@ -37,22 +34,85 @@
                     container: '#counter',
                     unit: 'word'
                 },
+                // set history: delay set to 1000, undo would undo all changes that occured within the last 1000 milliseconds. 
+                history: {
+                    delay: 1000,
+                    maxStack: 200,
+                    userOnly: true
+                },
                 showgroup: {
                     container: '#showgroup',
-                    display: 'group'
+                    // set word group rules
+                    dicGroup: {
+                        "Montreal" : "1",
+                        "Toronto" : "1",
+                        "Brossard" : "1",
+                        "Ottawa" : "1",
+                        "Sherbrooke" : "1"
+                    }
                     
                 }
             },
             placeholder: 'Compose an epic...',
             theme: 'snow'
         };
-               
-        var editor = new Quill('#editor-container', options);
+        //editor is a global variable for recall it in other functions       
+        editor = new Quill('#editor-container', options);
             
         // Enable all tooptips
         // $('[data-toggle="tooltip"]').tooltip();
-
         
+        //add click event for UndoByTime and Redo
+        var click_undoByTime = document.getElementById("undoByTime_click");
+        click_undoByTime.onclick = function() {
+            console.log("Successful Undo By Timing...");
+            editor.history.undo();
+        }
+
+        var click_redo = document.getElementById("redo_click");
+        click_redo.onclick = function() {
+            console.log("Successful Redo...");
+            editor.history.redo();
+        }
+        
+    
+
     });
 
+    // choose file to open
+    function readFile(input) {
+        let file = input.files[0];
+        let reader = new FileReader();
+
+        reader.readAsText(file);
+
+        reader.onload = function() {
+            
+            //set Contents in Quill Editor
+            var data = reader.result;
+            //transfer to string and replace all \,
+            var newdata = data.toString().replace(/\,/g, " ");
+            console.log("###reading file content: ", newdata);
+            editor.setContents([
+                {insert : newdata}
+            ])
+        };
+
+        reader.onerror = function() {
+            console.log(reader.error);
+        };
+        
+    }
+
+    // download function, blob is binary file
+    function  download(name, blob) {
+        var downloadElement = document.createElement('a');
+        var href = window.URL.createObjectURL(blob); //create download url
+        downloadElement.href = href;
+        downloadElement.download = `${name}.xlsx`; //download file name
+        document.body.appendChild(downloadElement);
+        downloadElement.click(); //click download
+        document.body.removeChild(downloadElement); //remove element
+        window.URL.revokeObjectURL(href); //release 
+    }
 </script> 
