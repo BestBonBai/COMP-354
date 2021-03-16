@@ -11285,6 +11285,43 @@ select {
 }
 
 
+/* new design buttons */
+
+button {
+    border: 1px solid white;
+    background: transparent;
+    text-transform: uppercase;
+    color: white;
+    padding: 10px 20px;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+}
+
+span {
+    z-index: 10;
+}
+
+button:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -36px;
+    left: -100px;
+    background: white;
+    width: 50px;
+    height: 125px;
+    opacity: 20%;
+    transform: rotate(-45deg);
+}
+
+button:hover:after {
+    left: 120%;
+    transition: all 600ms cubic-bezier(0.3, 1, 0.2, 1);
+    -webkit-transition: all 600ms cubic-bezier(0.3, 1, 0.2, 1);
+}
+
+
 /* night model */
 
 body.night,
@@ -11300,6 +11337,7 @@ body.night .next-page a {
     color: #888282;
 }
 
+body.night #file-btn,
 body.night #sidebarCollapse {
     background-color: #52915fe5;
     color: #333135;
