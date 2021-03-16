@@ -115,4 +115,22 @@
         document.body.removeChild(downloadElement); //remove element
         window.URL.revokeObjectURL(href); //release 
     }
+
+
+    // switch button for backgroud color
+    var btn = document.getElementById('btn');
+    var body = document.querySelector('body');
+    var isLight = true;
+    btn.onclick = function() {
+        if (isLight == true) {
+            document.body.classList.add('night');
+            // body.style.backgroundColor = '#000';
+            isLight = false;
+        } else {
+            document.body.classList.remove('night');
+            // body.style.backgroundColor = '#fff';
+            isLight = true;
+        }
+    }
+
 </script> 
