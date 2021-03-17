@@ -68,16 +68,80 @@
             console.log("Successful Undo By Timing...");
             editor.history.undo();
         }
-
+        
         var click_redo = document.getElementById("redo_click");
         click_redo.onclick = function() {
             console.log("Successful Redo...");
             editor.history.redo();
         }
-        
-    
 
-    });
+        //add undo and redo method of header menu
+        var click_undoByTime2 = document.getElementById("undoByTime_click2");
+        click_undoByTime2.onclick = function() {
+            console.log("Successful Undo By Timing...");
+            editor.history.undo();
+        }
+        var click_redo2 = document.getElementById("redo_click2");
+        click_redo2.onclick = function() {
+            console.log("Successful Redo...");
+            editor.history.redo();
+        }
+
+    //add download file function
+    var click_download = document.getElementById("download_click");
+    click_download.onclick = function(){
+        var frm = document.getElementById("form_download");  
+        frm.action = "/download";  
+        frm.method = "post";                 
+        frm.submit(); 
+    }
+    var click_download2 = document.getElementById("download_click2");
+    click_download2.onclick = function(){
+        var frm = document.getElementById("form_download2");  
+        frm.action = "/download";  
+        frm.method = "post";                 
+        frm.submit(); 
+    }
+
+    //save file function
+    var click_save = document.getElementById("save_click");
+    click_save.onclick = function(){
+        //get content from the editor
+        var getText = editor.getText();
+        getText = getText.trim();
+        var fsText = JSON.parse(JSON.stringify(getText));
+        console.log("%%%%%%save_click to get fsText%%%%%% " + fsText);
+        //submit form using POST method
+        document.getElementById("download_input").value = fsText;
+            
+        var frm = document.getElementById("form_save");  
+        frm.action = "/save";  
+        frm.method = "post";                 
+        frm.submit(); 
+    }
+    var click_save2 = document.getElementById("save_click2");
+    click_save2.onclick = function(){
+        //get content from the editor
+        var getText = editor.getText();
+        getText = getText.trim();
+        var fsText = JSON.parse(JSON.stringify(getText));
+        console.log("%%%%%%save_click to get fsText%%%%%% " + fsText);
+        //submit form using POST method
+        document.getElementById("download_input2").value = fsText;
+            
+        var frm = document.getElementById("form_save2");  
+        frm.action = "/save2";  
+        frm.method = "post";                 
+        frm.submit(); 
+    }
+
+
+
+
+    }); //document
+
+    
+   
 
     // choose file to open
     function readFile(input) {
@@ -103,19 +167,6 @@
         };
         
     }
-
-    // download function, blob is binary file
-    function  download(name, blob) {
-        var downloadElement = document.createElement('a');
-        var href = window.URL.createObjectURL(blob); //create download url
-        downloadElement.href = href;
-        downloadElement.download = `${name}.xlsx`; //download file name
-        document.body.appendChild(downloadElement);
-        downloadElement.click(); //click download
-        document.body.removeChild(downloadElement); //remove element
-        window.URL.revokeObjectURL(href); //release 
-    }
-
 
     // switch button for backgroud color
     var btn = document.getElementById('btn');

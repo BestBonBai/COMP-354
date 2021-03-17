@@ -8,7 +8,7 @@
               <a href="#"><span class="fa fa-user"></span> About</a>
           </li>
           <li>
-              <a href="#"><span class="fa fa-file-o"></span> New File</a>
+              <a href="/"><span class="fa fa-file-o"></span> New File</a>
           </li>
           <li>
             <a href="#undoSubmenu" data-toggle="collapse" aria-expanded="false">
@@ -24,10 +24,17 @@
             <a href="javascript:void(0);" id="redo_click"><span class="fa fa-rotate-right"></span> Redo</a>
           </li>
           <li>
-            <a href="#"><span class="fa fa-floppy-o"></span> Save</a>
+            <form id="form_save">
+              <input type="text" name="download_input" id="download_input" style="display: none;" >
+              <a href="javascript:void(0);" id="save_click">
+              <span class="fa fa-floppy-o"></span> Save</a>
+            </form>
           </li>
           <li>
-            <a href="test.txt" download="demo1.txt"><span class="fa fa-arrow-circle-o-down"></span> Download</a>
+            <form id="form_download">
+              <a href="javascript:void(0);" id="download_click">
+              <span class="fa fa-arrow-circle-o-down"></span>Download</a>              
+            </form>
           </li>
           <li>
             <a href="#"><span class="fa fa-cog"></span> Setting</a>
@@ -38,9 +45,7 @@
         </ul>
 
         <div class="footer">
-        	<p>
-			Copyright &copy;<script>document.write(new Date().getFullYear());</script> 
-			</p>
-            <p>Team 6 all members</p>
+        	<p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> </p>
+          <p>Team 6 all members</p>
         </div>
 </nav>

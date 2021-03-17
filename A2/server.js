@@ -1,4 +1,7 @@
 const express = require('express');
+var fs = require('fs');
+var bodyParser = require('body-parser');
+
 const app = express();
 const port = process.env.PORT || 8080
 
@@ -21,6 +24,30 @@ app.get('/about', function(req, res) {
     res.render('pages/about');
 });
 
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+//post download
+app.post('/download', urlencodedParser, function(req, res) {
+    console.log("###Download File success###");
+    res.download('./output.txt');
+});
+
+//post save file
+
+app.post('/save', urlencodedParser, function(req, res) {
+    var fsData = req.body.download_input;
+    //write file
+    fs.writeFileSync('./output.txt', fsData);
+    console.log("###Save File success###");
+});
+
+app.post('/save2', urlencodedParser, function(req, res) {
+    var fsData = req.body.download_input2;
+    //write file
+    fs.writeFileSync('./output.txt', fsData);
+    console.log("###Save File success###");
+});
+
+//listener
 app.listen(port, () => {
     console.log(`App is running at port: ${port}`);
 });
