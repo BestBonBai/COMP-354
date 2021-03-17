@@ -26,4 +26,4 @@ showgroup: {
 ````
 
 ### Demo of smoe features:
-![image](https://cdn.jsdelivr.net/gh/bestbonbai/bai_cdn@master/img/soen/demo1.gif)
+![Demo1](https://cdn.jsdelivr.net/gh/bestbonbai/bai_cdn@master/img/soen/demo3.gif)
