@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<title>About</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+<style>
+body {
+margin: 0;
+verflow: hidden;
+background-size: cover;
+  user-select: none;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: "montserrat",sans-serif;
+  box-sizing: border-box;
+  list-style: none;
+}
+.business-card{
+    width:600px;
+    height:450px;
+}
+
+.middle{  
+position: absolute;  
+top: 50%;  
+left: 50%;  
+transform: translate(-50%,-50%);  
+}  
+
+.front,.back{  
+width: 100%;  
+height: 100%;  
+overflow: hidden;  
+position: absolute;  
+backface-visibility: hidden;  
+transition: transform 0.5s linear;  
+}  
+
+.front{  
+background: rgba(255,255,255,.7);  
+padding: 40px;  
+transform: perspective(600px) rotateX(180deg);  
+}  
+  
+.front::before,.front::after{  
+content: "";  
+position: absolute;  
+right: 0;  
+}  
+
+.front::before{  
+background: #2c3e50;  
+width: 80px;  
+height: 120px;  
+bottom: 0;  
+clip-path:polygon(0 100%,40% 0,100% 100%);  
+}  
+  
+.front::after{  
+background: #34495e;  
+width: 100px;  
+height: 100%;  
+top: 0;  
+clip-path:polygon(0 0,100% 0,100% 100%,80% 100%);  
+}  
+
+.front h2{  
+text-transform: uppercase;  
+}  
+  
+.front span{  
+background: #34495e;  
+color: #fff;  
+padding: 4px 10px;  
+display: inline-block;  
+margin-bottom: 20px;  
+font-size: 14px;  
+}  
+
+.front .contact-info li{  
+margin: 10px 0;  
+display: flex;  
+align-items: center;  
+}  
+  
+.front .contact-info li i{  
+width: 26px;  
+height: 26px;  
+background: #34595e;  
+color: #fff;  
+display: flex;  
+justify-content: center;  
+align-items: center;  
+margin-right: 6px;  
+}  
+
+.back{  
+background: rgba(0,0,0,.6);  
+display: flex;  
+align-items: center;  
+justify-content: center;  
+color: #fff;  
+text-transform: uppercase;  
+letter-spacing: 8px;  
+font-size: 24px;  
+transform: perspective(600px) rotateX(0deg);  
+}  
+  
+.business-card-active .front{  
+transform: perspective(600px) rotateX(0deg);  
+}  
+.business-card-active .back{  
+transform: perspective(600px) rotateX(-180deg);  
+}  
+
+</style>
+
+</head>
+<body>
+<!-- partial-->
+<div class="business-card middle">
+     <div class="front">
+       <h2></h2>
+       <span>COMP 354 - Team 6 - All Members:</span>
+       <ul class="contact-info">
+        <li>
+           <i class="fa fa-id-card"></i> Jacob Lazda  (40041526)
+         </li>
+         <li>
+           <i class="fa fa-id-card"></i> Hualin Bai  (40053833)
+         </li>
+         <li>
+           <i class="fa fa-id-card"></i> Jiawei Zeng  (40079344)
+         </li>
+         <li>
+           <i class="fa fa-id-card"></i> Lingli Lin  (40065176)
+         </li>
+         <li>
+           <i class="fa fa-id-card"></i> Jiawei Yao  (27197829)
+         </li>
+         <li>
+           <i class="fa fa-id-card"></i> Yifan He  (40068616)
+         </li>
+         <li>
+           <i class="fa fa-id-card"></i> Qichen Liu  (40055916)
+         </li>
+         <br>
+         <li>
+           <i class="fas fa-map-marker-alt"></i> Concordia University, Montreal, QC, Canada
+         </li>
+       </ul>
+       <a href="/">Back to Home</a>
+     </div>
+     <div class="back">
+       <span>About US</span>
+     </div>
+     
+</div>
+<canvas id=q>
+
+<!-- partial -->
+<script>
+const s = window.screen;
+const w = (q.width = s.width);
+const h = (q.height = s.height);
+const ctx = q.getContext("2d");
+
+const p = Array(Math.floor(w / 10) + 1).fill(0);
+
+const random = (items) => items[Math.floor(Math.random() * items.length)];
+
+const hex = "0123456789ABCDEF".split("");
+
+setInterval(() => {
+   ctx.fillStyle = "rgba(0,0,0,.05)";
+   ctx.fillRect(0, 0, w, h);
+   ctx.fillStyle = "#0f0";
+p.map((v, i) => {
+   ctx.fillText(random(hex), i * 10, v);
+p[i] = v >= h || v > 50 + 10000 * Math.random() ? 0 : v + 10;
+});
+}, 1000 / 30);
+
+$(".business-card").click(function(){
+       $(".business-card").toggleClass("business-card-active");
+     });
+</script>
+
+</body>
+</html>
