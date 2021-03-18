@@ -16,8 +16,11 @@
         <div id="content">
           <!-- Read File  -->
           <div>
-          <button id="file-btn" class="btn btn-primary btn-sm" onclick="upload.click()"><span>choose file</span></button>
+          <button id="file-btn" class="btn btn-primary btn-sm" onclick="upload.click()" title="Open File">
+          <span>choose file</span></button>
           <input type="file" name="upload" id="upload" onchange="readFile(this)" style="display: none;" >
+          <!-- Speak Button  -->
+          <button id="speakText-btn" class="btn btn-primary btn-sm" title="Speak Text"><span class="fa fa-volume-up"></span> </button>
           </div>
         <%- include('partials/quillEditor.ejs'); %>
         </div>
