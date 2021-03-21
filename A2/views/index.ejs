@@ -13,17 +13,44 @@
       <div id="content" class="p-4 p-md-6">
         <%- include('partials/header'); %>
 
-        <div id="content">
           <!-- Read File  -->
-          <div>
+        <div>
           <button id="file-btn" class="btn btn-primary btn-sm" onclick="upload.click()" title="Open File">
           <span>choose file</span></button>
           <input type="file" name="upload" id="upload" onchange="readFile(this)" style="display: none;" >
           <!-- Speak Button  -->
           <button id="speakText-btn" class="btn btn-primary btn-sm" title="Speak Text"><span class="fa fa-volume-up"></span> </button>
-          </div>
-        <%- include('partials/quillEditor.ejs'); %>
+          <!-- Preview Button  -->
+          <button id="preview-btn" class="btn btn-primary btn-sm" title="Preview Markdown"><span class="fa fa-eye">&nbsp;preview</span></button>
         </div>
+        <%- include('partials/quillEditor.ejs'); %>
+           
+        
+        <!-- Preview Content  -->
+        <div id="content-preview">
+            <p>Test preview </p>
+        </div>
+
+        <!-- Settings Content  -->
+        <div id="content-settings">
+            <h3 style=" text-align: center;">Settings </h3>
+            <p>Developing...(need add button, range, checkbox, etc.)</p>
+            <p>Developing...(need more settings)</p>
+            <ul>
+              <li>
+                <a href="#"> MaxStack</a>
+              </li>
+              <li>
+                <a href="#">UndoByTiming</a>
+              </li>
+             </ul> 
+        </div>
+
+        <!-- Help Content  -->
+        <div id="content-help">
+            <%- include('pages/help'); %>
+        </div>
+
       </div>
   </div>
 

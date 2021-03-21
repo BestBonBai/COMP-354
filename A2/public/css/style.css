@@ -4588,6 +4588,8 @@ input[type="button"].btn-block {
 .nav-tabs .nav-link:hover,
 .nav-tabs .nav-link:focus {
     border-color: #e9ecef #e9ecef #dee2e6;
+    background: rgb(131, 53, 2);
+    color: rgb(34, 53, 197)
 }
 
 .nav-tabs .nav-link.disabled {
@@ -10993,7 +10995,7 @@ h5,
     background: rgb(104, 125, 216);
     border: none;
     border-radius: 0;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     box-shadow: 1px 1px 3px rgba(110, 57, 57, 0.1);
 }
@@ -11191,7 +11193,7 @@ a[data-toggle="collapse"] {
 
 .btn.btn-primary:hover,
 .btn.btn-primary:focus {
-    background: #7c0ae7 !important;
+    background: #0593d4 !important;
     border-color: #3e64ff !important;
 }
 
@@ -11338,6 +11340,8 @@ body.night .next-page a {
 }
 
 body.night #file-btn,
+body.night #speakText-btn,
+body.night #preview-btn,
 body.night #sidebarCollapse {
     background-color: #52915fe5;
     color: #333135;
@@ -11354,4 +11358,145 @@ body.night #navbarSupportedContent a,
 body.night #content .post p a,
 body.night .floor {
     color: #eebf9f;
+}
+
+body.night .btn.btn-primary:hover {
+    background: #e64b03;
+    border-color: #56c90a;
+}
+
+body.night .btn.btn-primary:focus body.night .btn.btn-primary:focus::after {
+    background: #d36205;
+    border-color: #0c0c0c;
+}
+
+body.night #sidebar ul li a:hover {
+    color: rgb(39, 138, 168);
+}
+
+body.night #sidebar .logo {
+    color: rgb(87, 91, 119);
+}
+
+body.night #content-preview {
+    background: rgba(216, 217, 219, 0.5);
+}
+
+
+/* Preview Model */
+
+body.preview #content-settings,
+#content-help {
+    display: none;
+}
+
+body.preview #content-container {
+    width: 50%;
+    display: inline;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body.preview #content-preview {
+    width: 50%;
+    display: inline;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    border: 0.5px solid #cceff5;
+    overflow: scroll;
+    text-align: left;
+}
+
+body.preview #content-preview p img {
+    width: 400px;
+}
+
+
+/* Settings Model */
+
+body.settings #content-preview,
+#content-help {
+    display: none;
+}
+
+body.settings #content-container {
+    width: 60%;
+    display: inline;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body.settings #content-settings {
+    width: 40%;
+    display: inline;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    border: 0.5px solid #0a9cf0;
+    text-align: left;
+    overflow: scroll;
+}
+
+body.settings #content-settings p img {
+    width: 400px;
+}
+
+
+/* Help Model */
+
+body.help #content-preview,
+#content-settings {
+    display: none;
+}
+
+body.help #content-container {
+    width: 60%;
+    display: inline;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body.help #content-help {
+    width: 40%;
+    display: inline;
+    float: left;
+    margin-left: auto;
+    margin-right: auto;
+    border: 0.5px solid #0a9cf0;
+    text-align: left;
+    overflow: scroll;
+}
+
+body.help #content-help p img {
+    width: 400px;
+}
+
+#preview-content img {
+    object-fit: fill;
+}
+
+
+/* fa fa-adjust */
+
+span.fa-adjust,
+span.fa-tachometer {
+    color: #000;
+}
+
+body.night span.fa-adjust,
+body.night span.fa-tachometer {
+    color: rgb(131, 53, 2);
+}
+
+
+/* body colorful model */
+
+body.color,
+body.color #body,
+body.color #content {
+    background-color: rgb(87, 91, 119);
 }
