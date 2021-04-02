@@ -57,7 +57,8 @@
                         "Toronto" : "1",
                         "Brossard" : "1",
                         "Ottawa" : "1",
-                        "Sherbrooke" : "1"
+                        "Sherbrooke" : "1",
+                        "And" : "1"
                     }
                     
                 }
@@ -75,7 +76,15 @@
         var click_undoByTime = document.getElementById("undoByTime_click");
         click_undoByTime.onclick = function() {
             console.log("Successful Undo By Timing...");
-            editor.history.undo();
+            editor.history.undo() ;
+
+            var history = editor.history;
+            console.log("History:\n")
+            console.log(history)
+        
+            
+            console.log("Editor history: " + editor.history);
+            
         }
 
         var click_redo = document.getElementById("redo_click");
@@ -164,7 +173,8 @@
             //set Contents in Quill Editor
             var data = reader.result;
             //transfer to string and replace all \,
-            var newdata = data.toString().replace(/\,/g, " ");
+            //var newdata = data.toString().replace(/\,/g, " ");
+            var newdata = data.toString().replace(/-/g, "-\n")
             console.log("###reading file content: ", newdata);
             editor.setContents([
                 {insert : newdata}
