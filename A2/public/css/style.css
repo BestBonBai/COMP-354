@@ -11500,3 +11500,21 @@ body.color #body,
 body.color #content {
     background-color: rgb(87, 91, 119);
 }
+
+#content-container {
+    width: auto;  
+    float: none;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#editor-container {
+    height: 450px;
+}
+
+#content-preview, 
+#content-settings, 
+#content-help {   
+    display: none;
+}
