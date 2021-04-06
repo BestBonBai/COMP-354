@@ -46,7 +46,7 @@ var options = {
 			
 		}
 	},
-	placeholder: 'Compose an epic...',
+	placeholder: 'Start typing...',
 	theme: 'snow'
 };
 //editor is a global variable for recall it in other functions       

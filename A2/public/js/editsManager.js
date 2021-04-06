@@ -5,9 +5,11 @@
 var click_undoByTime = document.getElementById("undoByTime_click");
 click_undoByTime.onclick = function() {
     console.log("Successful Undo By Timing...");
+    console.log("Before undo:\n");
+    console.log(editor.history.stack);
     editor.history.undo() ;
 
-    var history = editor.history;
+    var history = editor.history.stack;
     console.log("History:\n")
     console.log(history)
 
