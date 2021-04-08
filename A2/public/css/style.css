@@ -15,6 +15,16 @@
     background-color: #7610d4;
 }
 
+.nav-link,
+.nav-item {
+    color: #d6e4f0 !important;
+}
+
+body.night .nav-link,
+body.night .nav-item {
+    color: rgba(236, 157, 67, 0.5) !important;
+}
+
 .navbar ul li a {
     padding: 10px 30px;
     display: block;
@@ -218,7 +228,7 @@ select {
     height: 31px;
     position: relative;
     border: 1px solid #dfdfdf;
-    background-color: #fdfdfd;
+    background-color: #dfdfdf;
     box-shadow: #dfdfdf 0 0 0 0 inset;
     border-radius: 20px;
     border-top-left-radius: 20px;
@@ -336,6 +346,11 @@ button:hover:after {
 
 body.night,
 body.night #body,
+body.night #editsMenu,
+body.night #editor,
+body.night .row,
+body.night .table,
+body.night div.card div.card-body,
 body.night .page_navi a.current {
     background-color: #263238!important;
     color: #e2dfdf!important;
@@ -350,6 +365,9 @@ body.night .next-page a {
 body.night #file-btn,
 body.night #speakText-btn,
 body.night #preview-btn,
+body.night #undoByTime_click,
+body.night #undoByGroup_click,
+body.night #redo_click,
 body.night #sidebarCollapse {
     background-color: #52915fe5;
     color: #333135;
@@ -357,7 +375,8 @@ body.night #sidebarCollapse {
 
 body.night .navbar,
 body.night .mui-switch,
-body.night button {
+body.night button,
+body.night .btn {
     background-color: #324047;
     color: #888282;
 }
@@ -373,7 +392,8 @@ body.night .btn.btn-primary:hover {
     border-color: #56c90a;
 }
 
-body.night .btn.btn-primary:focus body.night .btn.btn-primary:focus::after {
+body.night .btn.btn-primary:focus,
+body.night .btn.btn-primary:focus::after {
     background: #d36205;
     border-color: #0c0c0c;
 }
@@ -510,7 +530,7 @@ body.color #content {
 }
 
 #content-container {
-    width: auto;  
+    width: auto;
     float: none;
     display: block;
     margin-left: auto;
@@ -523,52 +543,75 @@ body.color #content {
     height: 450px;
 }
 
-#content-preview, 
-#content-settings, 
-#content-help {   
+#content-preview,
+#content-settings,
+#content-help {
     display: none;
 }
 
+
 /* The sidebar menu */
+
 .sidenav {
-    height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 160px; /* Set the width of the sidebar */
-    position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-    z-index: 1; /* Stay on top */
-    top: 0; /* Stay at the top */
+    height: 100%;
+    /* Full-height: remove this if you want "auto" height */
+    width: 160px;
+    /* Set the width of the sidebar */
+    position: fixed;
+    /* Fixed Sidebar (stay in place on scroll) */
+    z-index: 1;
+    /* Stay on top */
+    top: 0;
+    /* Stay at the top */
     left: 0;
-    background-color: #111; /* Black */
-    overflow-x: hidden; /* Disable horizontal scroll */
+    background-color: #111;
+    /* Black */
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
     padding-top: 20px;
-  }
-  
-  /* The navigation menu links */
-  .sidenav a {
+}
+
+
+/* The navigation menu links */
+
+.sidenav a {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
     display: block;
-  }
-  
-  /* When you mouse over the navigation links, change their color */
-  .sidenav a:hover {
-    color: #f1f1f1;
-  }
-  
-  /* Style page content */
-  .main {
-    margin-left: 160px; /* Same as the width of the sidebar */
-    padding: 0px 10px;
-  }
-  
-  /* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
-  @media screen and (max-height: 450px) {
-    .sidenav {padding-top: 15px;}
-    .sidenav a {font-size: 18px;}
-  }
+}
 
-  #editsMenu, #editor {
+
+/* When you mouse over the navigation links, change their color */
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+
+/* Style page content */
+
+.main {
+    margin-left: 160px;
+    /* Same as the width of the sidebar */
+    padding: 0px 10px;
+}
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+#editsMenu,
+#editor {
     width: 100%;
     height: 85vh;
     background-color: #f6f6f6;
