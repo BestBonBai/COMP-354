@@ -3,7 +3,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="nav navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/">New</a>
+                <a class="nav-link" id="new_click" href="/">New</a>
             </li>
             <li class="nav-item">
                 <form id="form_save">
@@ -17,19 +17,19 @@
                 </form>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" onclick="click_setting();"><span class="fa fa-cog"></span> Settings</a>
+                <a class="nav-link" id="settings" href="#" onclick="click_setting();"><span class="fa fa-cog"></span> Settings</a>
             </li>
             <li>
-                <a class="nav-link" href="#" onclick="click_help();"><span class="fa fa-wheelchair"></span> Help</a>
+                <a class="nav-link" id="help" href="#" onclick="click_help();"><span class="fa fa-wheelchair"></span> Help</a>
             </li>
         </ul>
         <!-- light switch button -->
-        <span class="nav-item fa fa-adjust">
+        <span class="nav-item fa fa-adjust" id="icon1">
         <input id="btn" class="mui-switch mui-switch-anim" type="checkbox" checked>
         </span>
         <!-- colorful switch button -->
         <span>&nbsp;&nbsp;</span>
-        <span class="nav-item fa fa-tachometer">
+        <span class="nav-item fa fa-tachometer" id="icon2">
         <input id="color-btn" class="mui-switch mui-switch-anim" type="checkbox">
         </span>
     </div>

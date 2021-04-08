@@ -9,6 +9,10 @@ class showGroup {
 
     }
 
+    compareSentence() {
+
+    }
+
     compareWord() {
         let text = this.quill.getText();
         text = text.trim();
@@ -41,7 +45,11 @@ class showGroup {
         });
 
         console.log("List all matched words: ", arrGroup1);
-
+        var e2 = "";
+        newContent.forEach(element => {
+            e2 = e2 + " " + element;
+        });
+        $("#editor_new1").html("New: " + e2);
 
 
 
@@ -86,9 +94,17 @@ class showGroup {
     update() {
         var showText = this.compareWord();
 
-        var mytitle = 'Display all matched words: '
+        var mytitle = 'Display all matched words: ';
         this.container.innerText = mytitle + showText;
-
+        //update EditorMenu content
+        var title1 = 'Old: ';
+        var title2 = 'New: ';
+        console.log("@@@@@@@@@@ " + showText);
+        var e1 = "";
+        showText.forEach(element => {
+            e1 = e1 + " " + element;
+        });
+        $("#editor_old1").html(title1 + e1);
     }
 
 

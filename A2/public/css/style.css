@@ -15,6 +15,16 @@
     background-color: #7610d4;
 }
 
+.nav-link,
+.nav-item {
+    color: #d6e4f0 !important;
+}
+
+body.night .nav-link,
+body.night .nav-item {
+    color: rgba(236, 157, 67, 0.5) !important;
+}
+
 .navbar ul li a {
     padding: 10px 30px;
     display: block;
