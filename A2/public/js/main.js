@@ -28,7 +28,7 @@ var options = {
 		},
 		// set history: delay set to 1000, undo would undo all changes that occured within the last 1000 milliseconds. 
 		history: {
-			delay: 1000,
+			delay: 5000,
 			maxStack: 200,
 			userOnly: true
 		},
