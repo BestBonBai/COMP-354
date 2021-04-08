@@ -19,37 +19,6 @@
 })(jQuery);
 
 var options = {
-<<<<<<< HEAD
-	debug: 'info',
-	modules: {
-		toolbar: '#toolbar-container',
-		counter: {
-			container: '#counter',
-			unit: 'word'
-		},
-		// set history: delay set to 1000, undo would undo all changes that occured within the last 1000 milliseconds. 
-		history: {
-			delay: 5000,
-			maxStack: 200,
-			userOnly: true
-		},
-		showgroup: {
-			container: '#showgroup',
-			// set word group rules
-			dicGroup: {
-				"Montreal" : "1",
-				"Toronto" : "1",
-				"Brossard" : "1",
-				"Ottawa" : "1",
-				"Sherbrooke" : "1",
-				"And" : "1"
-			}
-			
-		}
-	},
-	placeholder: 'Start typing...',
-	theme: 'snow'
-=======
     debug: 'info',
     modules: {
         toolbar: '#toolbar-container',
@@ -83,7 +52,6 @@ var options = {
     },
     placeholder: 'Start typing...',
     theme: 'snow'
->>>>>>> d29eacc36bd13d2cb3a62267e2723af031a9fef6
 };
 //editor is a global variable for recall it in other functions       
 editor = new Quill('#editor-container', options);
