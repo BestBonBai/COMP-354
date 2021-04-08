@@ -40,12 +40,6 @@ app.post('/save', urlencodedParser, function(req, res) {
     console.log("###Save File success###");
 });
 
-app.post('/save2', urlencodedParser, function(req, res) {
-    var fsData = req.body.download_input2;
-    //write file
-    fs.writeFileSync('./output.txt', fsData);
-    console.log("###Save File2 success###");
-});
 
 //listener
 app.listen(port, () => {
