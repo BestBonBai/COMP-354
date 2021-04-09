@@ -637,3 +637,8 @@ body.color #content {
     border-top-color: #163172;
     border-top-width: 7px;
 }
+
+#deleteEdits,
+#performEdits {
+    display: none;
+}
