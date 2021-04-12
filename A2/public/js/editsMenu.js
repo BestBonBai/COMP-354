@@ -26,7 +26,7 @@ class EditsMenu {
                     newContent = edit['insert']
                     insertFlag = true
                 } else if (edit['retain'] != undefined) {
-                    
+
                 } else if (edit['delete'] != undefined && !insertFlag) {
                     newContent = ""
                 }
@@ -37,10 +37,10 @@ class EditsMenu {
                     oldContent = edit['insert']
                     insertFlag = true
                 } else if (edit['retain'] != undefined) {
-                    
+
                 } else if (edit['delete'] != undefined && !insertFlag) {
                     oldContent = ""
-                } 
+                }
             })
             if (this.edits[editNum-1]) { // update existing edit
                 this.edits[editNum-1].oldContent = oldContent
