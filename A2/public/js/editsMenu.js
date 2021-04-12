@@ -27,7 +27,7 @@ class EditsMenu {
                     newContent = edit['insert']
                     insertFlag = true
                 } else if (edit['retain'] != undefined) {
-                    
+
                 } else if (edit['delete'] != undefined && !insertFlag) {
                     newContent = ""
                 }
@@ -38,22 +38,24 @@ class EditsMenu {
                     oldContent = edit['insert']
                     insertFlag = true
                 } else if (edit['retain'] != undefined) {
-                    
+
                 } else if (edit['delete'] != undefined && !insertFlag) {
                     oldContent = ""
-                } 
+                }
             })
             insertFlag = false
             menuContent += `<tr>
                                 <td>
                                     <div class="card">
-                                        <div class="card-body">
+                                        <div class="card-body" >
                                             <h5 class="card-title">Edit ${editNum}</h5>
                                             <p id="editor_old1" class="card-text">Old: ${oldContent}</p>
                                             <p id="editor_new1" class="card-text">New: ${newContent}</p>
-                                            <button class="btn btn-primary" value="${[editNum]}" onclick="editSelected(this.value)" >Select</button>
                                         </div>
+                                            <button class="btn btn-primary" value="${[editNum]}" onclick="editSelected(this.value)" >Select</button>
+                                        
                                     </div>
+                            
                                 </td>
                             </tr>`
             editNum++
@@ -69,16 +71,16 @@ class EditsMenu {
 Quill.register('modules/editsMenu', EditsMenu, true)
 
 function editSelected(editNum) {
-    editNumSelected.push(editNum) 
+    editNumSelected.push(editNum)
     document.getElementById('deleteEdits').style.display = "block"
     document.getElementById('performEdits').style.display = "block"
 }
 
 function performEdits() {
     editNumSelected.forEach(editNum => {
-        undoItem = editor.history.stack.undo.splice(editNum-1, 1)[0].undo.ops
-        //TODO: newline char bug
-        //TODO: bug when doing different edit when another edit has an old and new
+        undoItem = editor.history.stack.undo.splice(editNum - 1, 1)[0].undo.ops
+            //TODO: newline char bug
+            //TODO: bug when doing different edit when another edit has an old and new
         console.log("Edit NUMBER " + editNum)
         console.log(undoItem)
         editor.updateContents(undoItem)
@@ -90,9 +92,9 @@ function performEdits() {
 
 function deleteEdits() {
     editNumSelected.forEach(editNum => {
-        editor.history.stack.undo.splice(editNum-1, 1)
-        //TODO: newline char bug
-        //TODO: bug when doing different edit when another edit has an old and new
+        editor.history.stack.undo.splice(editNum - 1, 1)
+            //TODO: newline char bug
+            //TODO: bug when doing different edit when another edit has an old and new
     })
     $("#ungrouped-table-body").html('')
     document.getElementById('deleteEdits').style.display = "none"
