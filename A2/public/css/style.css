@@ -207,6 +207,8 @@ a[data-toggle="collapse"] {
 .btn.btn-primary {
     background: #1e56a0;
     border-color: #1e56a0;
+    font-size: 12px;
+    text-transform: none;
 }
 
 .btn.btn-primary:hover,
@@ -631,6 +633,13 @@ body.color #content {
     text-align: center;
 }
 
+.subtitle {
+    padding-top: 2px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 14px;
+}
+
 .row {
     background-color: #f6f6f6;
     border-top-style: solid;
@@ -641,4 +650,8 @@ body.color #content {
 #deleteEdits,
 #performEdits {
     display: none;
+}
+
+.action-btn {
+    padding-left: 10px;
 }

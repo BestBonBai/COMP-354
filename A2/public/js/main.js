@@ -58,4 +58,4 @@ var options = {
 };
 //editor is a global variable for recall it in other functions       
 editor = new Quill('#editor-container', options);
-console.log("HEYYYYYY")
+editsMenu = new EditsMenu(editor, options);

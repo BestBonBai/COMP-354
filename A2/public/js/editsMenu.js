@@ -1,6 +1,5 @@
 // This file contains the code relevant to the Edits Menu
 var Delta = Quill.import('delta')
-var editNumSelected = []
 
 class EditsMenu {
     constructor(quill, options) {
@@ -9,14 +8,14 @@ class EditsMenu {
         this.container = document.querySelector(options.container);
         quill.on('text-change', this.update.bind(this));
         this.editorContents = this.quill.getContents();
+        this.edits = []
     }
 
-    populateMenu() {
+    populateEdits() {
         var redoStack = []
         var undoStack = []
         var oldContent = ""
         var newContent = ""
-        var menuContent = ""
         var insertFlag = false
         var editNum = 1
         editor.history.stack.undo.forEach(element => {
@@ -43,59 +42,109 @@ class EditsMenu {
                     oldContent = ""
                 } 
             })
+            if (this.edits[editNum-1]) { // update existing edit
+                this.edits[editNum-1].oldContent = oldContent
+                this.edits[editNum-1].newContent = newContent
+            } else { // create new edit
+                this.edits[editNum-1] = new Edit(oldContent, newContent, editNum)
+            }
             insertFlag = false
-            menuContent += `<tr>
-                                <td>
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Edit ${editNum}</h5>
-                                            <p id="editor_old1" class="card-text">Old: ${oldContent}</p>
-                                            <p id="editor_new1" class="card-text">New: ${newContent}</p>
-                                            <button class="btn btn-primary" value="${[editNum]}" onclick="editSelected(this.value)" >Select</button>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>`
             editNum++
-            $("#ungrouped-table-body").html(menuContent)
         });
     }
 
+    updateMenu() {
+        var ungroupedContent = ""
+        var groupedContent = ""
+        this.edits.forEach(edit => {
+            if (edit.group == "") { //ungrouped
+                ungroupedContent += `<tr>
+                                        <td>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <i id="edit${edit.number}Selected"class="fas fa-check-circle" style="float:right; color: #1e56a0; display:none;"></i>
+                                                    <h5 class="card-title">Edit ${edit.number}</h5>
+                                                    <p id="editor_old1" class="card-text">Old: ${edit.oldContent}</p>
+                                                    <p id="editor_new1" class="card-text">New: ${edit.newContent}</p>
+                                                    <button class="btn btn-primary" value="${edit.number}" onclick="editsMenu.editSelected(this.value)" >Select</button>
+                                                    <button class="btn btn-primary" value="${edit.number}" onclick="editsMenu.addToGroup(this.value)" >Add To Group</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>`
+            } else {
+                groupedContent += `<tr>
+                                        <td>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <i id="edit${edit.number}Selected"class="fas fa-check-circle" style="float:right; color: #1e56a0; display:none;"></i>
+                                                    <h5 class="card-title">Edit ${edit.number} - ${edit.group}</h5>
+                                                    <p id="editor_old1" class="card-text">Old: ${edit.oldContent}</p>
+                                                    <p id="editor_new1" class="card-text">New: ${edit.newContent}</p>
+                                                    <button class="btn btn-primary" value="${edit.number}" onclick="editsMenu.editSelected(this.value)" >Select</button>
+                                                    <button class="btn btn-primary" value="${edit.number}" onclick="editsMenu.addToGroup(this.value)" >Add To Group</button>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>`
+            }
+        })
+        $("#ungrouped-table-body").html(ungroupedContent)
+        $("#grouped-table-body").html(groupedContent)
+    }
+
+    editSelected(editNum) {
+        this.edits[editNum-1].selected = true
+        document.getElementById('deleteEdits').style.display = "inline-block"
+        document.getElementById('performEdits').style.display = "inline-block"
+        document.getElementById(`edit${editNum}Selected`).style.display = "block"
+    }
+    
+    performEdits() {
+        this.edits.forEach(edit => {
+            if (edit.selected) {
+                var undoItem = editor.history.stack.undo.splice(edit.number-1, 1)[0].undo.ops
+                //TODO: newline char bug
+                //TODO: bug when doing different edit when another edit has an old and new
+                editor.updateContents(undoItem)
+                document.getElementById(`edit${edit.number}Selected`).style.display = "none"
+            }
+        })
+        document.getElementById('deleteEdits').style.display = "none"
+        document.getElementById('performEdits').style.display = "none"
+        this.edits = []
+        this.update()
+    }
+    
+    deleteEdits() {
+        this.edits.forEach(edit => {
+            if (edit.selected) {
+                editor.history.stack.undo.splice(edit.number-1, 1)
+                //TODO: newline char bug
+                //TODO: bug when doing different edit when another edit has an old and new
+            }
+        })
+        $("#ungrouped-table-body").html('')
+        document.getElementById('deleteEdits').style.display = "none"
+        document.getElementById('performEdits').style.display = "none"
+        this.edits = []
+        this.update()
+    }
+    
+    addToGroup(editNum) {
+        var group = prompt("What group do you want to add this edit to?", "Group A")
+        if (group == null || group == "") {
+            return
+        }
+        this.edits[editNum-1].group = group
+        this.updateMenu()
+    }
+
     update() {
-        this.populateMenu()
+        this.populateEdits()
+        this.updateMenu()
     }
 }
 
 Quill.register('modules/editsMenu', EditsMenu, true)
 
-function editSelected(editNum) {
-    editNumSelected.push(editNum) 
-    document.getElementById('deleteEdits').style.display = "block"
-    document.getElementById('performEdits').style.display = "block"
-}
-
-function performEdits() {
-    editNumSelected.forEach(editNum => {
-        undoItem = editor.history.stack.undo.splice(editNum-1, 1)[0].undo.ops
-        //TODO: newline char bug
-        //TODO: bug when doing different edit when another edit has an old and new
-        console.log("Edit NUMBER " + editNum)
-        console.log(undoItem)
-        editor.updateContents(undoItem)
-    })
-    document.getElementById('deleteEdits').style.display = "none"
-    document.getElementById('performEdits').style.display = "none"
-    editNumSelected = []
-}
-
-function deleteEdits() {
-    editNumSelected.forEach(editNum => {
-        editor.history.stack.undo.splice(editNum-1, 1)
-        //TODO: newline char bug
-        //TODO: bug when doing different edit when another edit has an old and new
-    })
-    $("#ungrouped-table-body").html('')
-    document.getElementById('deleteEdits').style.display = "none"
-    document.getElementById('performEdits').style.display = "none"
-    editNumSelected = []
-}
