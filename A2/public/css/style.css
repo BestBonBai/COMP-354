@@ -377,13 +377,17 @@ button:hover:after {
 .card-body {
     /* we can use different image for ungroup and group editor menu cards */
     /* background-image: url(https://ionicframework.com/img/getting-started/ionic-native-card.png); */
-    background-image: url(https://ionicframework.com/img/getting-started/components-card.png);
+    background-image: url(https://cdn.jsdelivr.net/gh/bestbonbai/bai_cdn@master/img/soen/components-card.png);
     background-repeat: no-repeat;
     background-position: right;
     background-size: 80px;
     width: auto;
     text-align: left;
     overflow-x: hidden;
+}
+
+body.night .card-body {
+    background-image: url(https://cdn.jsdelivr.net/gh/bestbonbai/bai_cdn@master/img/soen/card-dark.png);
 }
 
 #editsMenu {
