@@ -26,6 +26,15 @@ click_save.onclick = function() {
     alert('file is saved! please download it!');
 }
 
+//save as file
+var click_saveas = document.getElementById("saveas_click");
+click_saveas.onclick = function() {
+    //get content from the editor
+    var getText = editor.getText();
+    var file = new File([getText], "saveas1.txt", { type: "text/plain;charset=utf-8" });
+    saveAs(file);
+}
+
 // choose file to open
 function readFile(input) {
     let file = input.files[0];

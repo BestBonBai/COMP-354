@@ -7,6 +7,8 @@ https://www.npmjs.com/get-npm
 Run 'npm run start' in the A2 directory
 or use 'node server.js'
 
+### Test File save and download
+Need to set your broswer settings -> Downloads -> Open `Ask where to save each file before downloading` option
 
 ### Test Group words:
 Demo: city words:
