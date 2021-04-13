@@ -5,23 +5,9 @@
 var click_undoByTime = document.getElementById("undoByTime_click");
 click_undoByTime.onclick = function() {
     console.log("Successful Undo By Timing...");
-    console.log("Before undo:\n");
-    console.log(editor.history.stack.undo);
-    
-    editor.history.stack.undo.forEach(element => {
-        element.redo.ops.forEach(edit => {
-            console.log(edit['insert'])
-        })
-    });
     editor.history.undo() ;
-
-    var history = editor.history.stack;
-    console.log("History:\n")
-    console.log(history)
-
-    
-    console.log("Editor history: " + editor.history);
-    
+    editsMenu.edits = [];
+    editsMenu.update();
 }
 
 // Simple Redo
@@ -29,4 +15,6 @@ var click_redo = document.getElementById("redo_click");
 click_redo.onclick = function() {
     console.log("Successful Redo...");
     editor.history.redo();
+    editsMenu.edits = [];
+    editsMenu.update();
 }

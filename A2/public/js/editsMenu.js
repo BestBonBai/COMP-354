@@ -127,10 +127,11 @@ class EditsMenu {
     performEdits() {
         this.edits.slice().reverse().forEach(edit => {
             if (edit.selected) {
-                var undoItem = editor.history.stack.undo.splice(edit.number-1, 1)[0].undo.ops
+                var undoItem = editor.history.stack.undo.splice(edit.number-1, 1)[0]
+                editor.history.stack.redo.unshift(undoItem)
                 //TODO: newline char bug
                 //TODO: bug when doing different edit when another edit has an old and new
-                editor.updateContents(undoItem)
+                editor.updateContents(undoItem.undo.ops)
                 document.getElementById(`edit${edit.number}Selected`).style.display = "none"
             }
         })
