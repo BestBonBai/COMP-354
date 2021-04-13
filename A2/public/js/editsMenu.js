@@ -1,6 +1,4 @@
 // This file contains the code relevant to the Edits Menu
-var Delta = Quill.import('delta')
-
 class EditsMenu {
     constructor(quill, options) {
         this.quill = quill;
