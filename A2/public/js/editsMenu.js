@@ -9,6 +9,7 @@ class EditsMenu {
         quill.on('text-change', this.update.bind(this));
         this.editorContents = this.quill.getContents();
         this.edits = []
+        this.groups = []
     }
 
     populateEdits() {
@@ -18,6 +19,10 @@ class EditsMenu {
         var newContent = ""
         var insertFlag = false
         var editNum = 1
+        console.log("UNDO STACK")
+        console.log(editor.history.stack.undo)
+        console.log("REDO STACK")
+        console.log(editor.history.stack.redo)
         editor.history.stack.undo.forEach(element => {
             redoStack = element.redo.ops
             undoStack = element.undo.ops
@@ -56,6 +61,7 @@ class EditsMenu {
     updateMenu() {
         var ungroupedContent = ""
         var groupedContent = ""
+        var allGroups = ""
         this.edits.forEach(edit => {
             if (edit.group == "") { //ungrouped
                 ungroupedContent += `<tr>
@@ -72,25 +78,35 @@ class EditsMenu {
                                             </div>
                                         </td>
                                     </tr>`
-            } else {
-                groupedContent += `<tr>
-                                        <td>
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <i id="edit${edit.number}Selected"class="fas fa-check-circle" style="float:right; color: #1e56a0; display:none;"></i>
-                                                    <h5 class="card-title">Edit ${edit.number} - ${edit.group}</h5>
-                                                    <p id="editor_old1" class="card-text">Old: ${edit.oldContent}</p>
-                                                    <p id="editor_new1" class="card-text">New: ${edit.newContent}</p>
-                                                    <button class="btn btn-primary" value="${edit.number}" onclick="editsMenu.editSelected(this.value)" >Select</button>
-                                                    <button class="btn btn-primary" value="${edit.number}" onclick="editsMenu.addToGroup(this.value)" >Add To Group</button>
-                                                </div>
-                                            </div>
-                                        </td>
-                                    </tr>`
             }
         })
+        this.groups.forEach(group => {
+            var groupHeader = `<tr>
+                                    <th class="subtitle" scope="col">${group} <button class="btn btn-primary" value="${group}" style="float:right;" onclick="editsMenu.groupSelected(this.value)">Select All</button></th>
+                                </tr>`
+            groupedContent = ""
+            this.edits.forEach(edit => {
+                if (edit.group == group ) {
+                    groupedContent += `<tr>
+                                            <td>
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <i id="edit${edit.number}Selected"class="fas fa-check-circle" style="float:right; color: #1e56a0; display:none;"></i>
+                                                        <h5 class="card-title">Edit ${edit.number}</h5>
+                                                        <p id="editor_old1" class="card-text">Old: ${edit.oldContent}</p>
+                                                        <p id="editor_new1" class="card-text">New: ${edit.newContent}</p>
+                                                        <button class="btn btn-primary" value="${edit.number}" onclick="editsMenu.editSelected(this.value)" >Select</button>
+                                                        <button class="btn btn-primary" value="${edit.number}" onclick="editsMenu.addToGroup(this.value)" >Add To Group</button>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>`
+                }
+            })
+            allGroups += groupHeader + groupedContent
+        })
         $("#ungrouped-table-body").html(ungroupedContent)
-        $("#grouped-table-body").html(groupedContent)
+        $("#grouped-table-body").html(allGroups)
     }
 
     editSelected(editNum) {
@@ -99,9 +115,17 @@ class EditsMenu {
         document.getElementById('performEdits').style.display = "inline-block"
         document.getElementById(`edit${editNum}Selected`).style.display = "block"
     }
+
+    groupSelected(group) {
+        this.edits.forEach(edit => {
+            if (edit.group == group) {
+                this.editSelected(edit.number)
+            }
+        })
+    }
     
     performEdits() {
-        this.edits.forEach(edit => {
+        this.edits.slice().reverse().forEach(edit => {
             if (edit.selected) {
                 var undoItem = editor.history.stack.undo.splice(edit.number-1, 1)[0].undo.ops
                 //TODO: newline char bug
@@ -117,7 +141,7 @@ class EditsMenu {
     }
     
     deleteEdits() {
-        this.edits.forEach(edit => {
+        this.edits.slice().reverse().forEach(edit => {
             if (edit.selected) {
                 editor.history.stack.undo.splice(edit.number-1, 1)
                 //TODO: newline char bug
@@ -137,11 +161,26 @@ class EditsMenu {
             return
         }
         this.edits[editNum-1].group = group
+        if (!this.groups.includes(group)) { this.groups.push(group); }
         this.updateMenu()
+    }
+
+    updateGroups() {
+        this.groups.forEach((group, index) => {
+            var shouldRemove = true
+            this.edits.forEach(edit => {
+                if (edit.group == group) {
+
+                    shouldRemove = false
+                }
+            })
+            if (shouldRemove) { this.groups.splice(index, 1); }
+        })
     }
 
     update() {
         this.populateEdits()
+        this.updateGroups()
         this.updateMenu()
     }
 }
