@@ -7,5 +7,3 @@ global.EditsMenu = EditsMenu;
 global.Quill = Quill;
 window.$ = $;
 global.$ = global.jQuery = $;
-
-
