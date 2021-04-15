@@ -1,3 +1,9 @@
+### Test CI info:
+![test CI of Editor](https://github.com/BestBonBai/architecture/actions/workflows/testRun.yml/badge.svg)
+![branch architecture](https://github.com/github/architecture/actions/workflows/testRun.yml/badge.svg?branch=feature-1)
+
+
+
 ### First install NodeJS and NPM if not already installed.
 https://www.npmjs.com/get-npm
 
