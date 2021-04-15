@@ -1,6 +1,6 @@
-### Test CI info:
+### Smart Editor:
 [![Test Run Editor - V2](https://github.com/BestBonBai/COMP-354/actions/workflows/testRun.yml/badge.svg)](https://github.com/BestBonBai/COMP-354/actions/workflows/testRun.yml)
-![branch architecture](https://github.com/github/COMP-354/actions/workflows/testRun.yml/badge.svg?branch=feature-1)
+![branch architecture](https://github.com/BestBonBai/COMP-354/actions/workflows/testRun.yml/badge.svg?branch=feature-1)
 
 
 ### First install NodeJS and NPM if not already installed.
