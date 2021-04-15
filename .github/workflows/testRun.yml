@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: '12.x'
       - name: Install dependencies
-          run: npm ci
+        run: npm ci
       - run: npm run build --if-present
       - name: run test files
         run: npm run test    
