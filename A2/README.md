@@ -29,3 +29,7 @@ showgroup: {
 
 ### Demo of smoe features:
 ![Demo1](https://cdn.jsdelivr.net/gh/bestbonbai/bai_cdn@master/img/soen/demo3.gif)
+
+### New features:
+
+### Add Test CI
