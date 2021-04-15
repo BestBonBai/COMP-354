@@ -29,7 +29,7 @@
     "jest": {
         "verbose": true,
         "setupFilesAfterEnv": [
-            "<rootDir>/testSetup.js",
+            "<rootDir>/testsetup.js",
             "<rootDir>/test/edit.js",
             "<rootDir>/public/js/showGroup.js",
             "<rootDir>/public/js/counter.js",
