@@ -9,7 +9,8 @@ class EditsMenu {
         this.edits = []
         this.groups = []
     }
-
+    
+    // Iterates through the undo and redo stacks located in the quill editor and populates the edits array
     populateEdits() {
         var redoStack = []
         var undoStack = []
@@ -17,10 +18,6 @@ class EditsMenu {
         var newContent = ""
         var insertFlag = false
         var editNum = 1
-        console.log("UNDO STACK")
-        console.log(editor.history.stack.undo)
-        console.log("REDO STACK")
-        console.log(editor.history.stack.redo)
         editor.history.stack.undo.forEach(element => {
             redoStack = element.redo.ops
             undoStack = element.undo.ops
@@ -56,6 +53,7 @@ class EditsMenu {
         });
     }
 
+    // updates the Edits Menu with all the edits in the edits array
     updateMenu() {
         var ungroupedContent = ""
         var groupedContent = ""
