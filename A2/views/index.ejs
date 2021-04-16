@@ -39,7 +39,7 @@
     <%- include('partials/navbar'); %>
     
     <div class="row">
-      <div class="col-md-3 no-gutters" id="editsMenu">
+      <div class="col-md-3 no-gutters">
           <%- include('partials/editsMenu'); %>
       </div>
       <div class="col-md-9 no-gutters" id="editor">
@@ -90,10 +90,7 @@
           
               <!-- Add group display DIV -->
               <div id="showgroup"></div>
-              <div class="action-btn">
-                  <button id="performEdits" class="btn btn-primary" onclick="editsMenu.performEdits()">Undo Selected Edit(s)</button>
-                  <button id="deleteEdits" class="btn btn-primary" onclick="editsMenu.deleteEdits()">Delete Selected Edit(s)</button>
-              </div>
+              
           
             </div>
                
