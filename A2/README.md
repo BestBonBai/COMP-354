@@ -1,3 +1,7 @@
+### Smart Editor:
+[![Test Run Editor - V2](https://github.com/BestBonBai/COMP-354/actions/workflows/testRun.yml/badge.svg)](https://github.com/BestBonBai/COMP-354/actions/workflows/testRun.yml)
+
+
 ### First install NodeJS and NPM if not already installed.
 https://www.npmjs.com/get-npm
 
@@ -29,3 +33,7 @@ showgroup: {
 
 ### Demo of smoe features:
 ![Demo1](https://cdn.jsdelivr.net/gh/bestbonbai/bai_cdn@master/img/soen/demo3.gif)
+
+### New features:
+
+### Add Test CI

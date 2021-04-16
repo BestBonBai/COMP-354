@@ -9,10 +9,6 @@ class showGroup {
 
     }
 
-    compareSentence() {
-
-    }
-
     compareWord() {
         let text = this.quill.getText();
         text = text.trim();
@@ -32,10 +28,10 @@ class showGroup {
         arrWord.forEach(element => {
             if (alistGroup.hasOwnProperty(element)) {
                 //assign a word into different group (e.g group1, group2)
-                if (alistGroup[element] == "1") {
-                    arrGroup1.push(element);
-                    console.log("Finding word of groupDic : ", element, ",in Group : ", alistGroup[element]);
-                }
+                //if (alistGroup[element] == "1") {
+                arrGroup1.push(element);
+                console.log("Finding word of groupDic : ", element, ",in Group : ", alistGroup[element]);
+                //}
             } else {
                 // use JSON if we have more groups, now we use array
                 newContent.push(element);
@@ -44,49 +40,6 @@ class showGroup {
 
         });
 
-        console.log("List all matched words: ", arrGroup1);
-        var e2 = "";
-        newContent.forEach(element => {
-            e2 = e2 + " " + element;
-        });
-        $("#editor_new1").html("New: " + e2);
-
-
-
-        //add undoByGroupclick event
-        var click_undoByGroup = document.getElementById("undoByGroup_click");
-
-        click_undoByGroup.onclick = function() {
-            //alert("testing");
-            console.log("Deleting the matched words in text...");
-
-            //transfer to string and replace all \,
-            var newText = newContent.toString().replace(/\,/g, " ");
-            // set new text after remove the pecific group words
-            editor.setContents([
-                { insert: newText }
-            ]);
-
-            var redoType = 1;
-            if (redoType == 1) {
-                var click_redo = document.getElementById("redo_click");
-                click_redo.onclick = function() {
-                    console.log("Successful Redo Group...");
-                    editor.setContents([
-                        { insert: oldText }
-                    ])
-                    redoType = 0;
-                }
-
-            }
-
-        }
-
-
-
-
-
-
         return arrGroup1;
 
     }
@@ -94,18 +47,49 @@ class showGroup {
     update() {
         var showText = this.compareWord();
 
-        var mytitle = 'Display all matched words: ';
-        this.container.innerText = mytitle + showText;
-        //update EditorMenu content
-        var title1 = 'Old: ';
-        var title2 = 'New: ';
-        console.log("@@@@@@@@@@ " + showText);
-        var e1 = "";
-        showText.forEach(element => {
-            e1 = e1 + " " + element;
-        });
-        $("#editor_old1").html(title1 + e1);
+        var mytitle = `<p>Display all matched words group ideas: `
+
+        //update showGroup content
+        this.listWordGroup(showText, mytitle);
+
     }
+
+    listWordGroup(showText, mytitle) {
+        const alistGroup = JSON.parse(JSON.stringify(this.options.dicGroup));
+        var disListWord = "";
+        var count = 0;
+
+        var uniShowText = this.unique(showText);
+        uniShowText.forEach(element => {
+
+            if (alistGroup.hasOwnProperty(element)) {
+                count += 1;
+                var listWordIdea = "";
+                for (var item in alistGroup) {
+                    if (alistGroup[item] == alistGroup[element] && item != element) {
+                        listWordIdea += item + ", ";
+                        //console.log("&&&&&&&&&&223 " + item);
+                    }
+                }
+                // alistGroup.forEach(e2 => {
+                //     if (alistGroup[e2] == alistGroup[element] && e2 != element) {
+                //         listWordIdea += e2 + ", ";
+                //     }
+                // });
+                listWordIdea = listWordIdea.substring(0, listWordIdea.length - 2);
+
+                disListWord += ` [Word ${count}] ${element} :: ${listWordIdea}.`
+            }
+        });
+
+        $("#showgroup").html(mytitle + disListWord + `</p>`);
+
+    }
+
+    unique(arr) {
+        return arr.reduce((prev, cur) => prev.includes(cur) ? prev : [...prev, cur], []);
+    }
+
 
 
 

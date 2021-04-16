@@ -175,6 +175,14 @@ editsMenu = new EditsMenu(editor, options);
 
 });
 
+it("Test if the editor is there", () =>{
+    expect(editor).toBeTruthy();
+});//test if the editor is there
+
+it("Test if the editorMenu is there", () =>{
+    expect(editsMenu).toBeTruthy();
+});//test if the editorMenu is there
+
 it("should add a word to the editor and pop up in the stack", () => {
     console.log("Before insert")
     editor.updateContents([{
@@ -184,4 +192,39 @@ it("should add a word to the editor and pop up in the stack", () => {
     console.log("Printing editor stack:\n")
     console.log(editsMenu.edits)
     expect(editsMenu.edits[0]).toMatchObject(edit);
-  });
+  });//test the edit
+
+  it("Test if the editor is being seleted or not", () =>{
+    editsMenu.editSelected(1);
+    console.log("Printing editor select:\n")
+    console.log(editsMenu.edits)
+    var edit = new Edit("", "Hello", 1)
+    edit.selected = true
+    expect(editsMenu.edits[0]).toMatchObject(edit);
+});//test if the editor is been selected or not(pass but cannt read the $ sign)
+
+//window.prompt = jest.fn();
+//it("Test if the editor is being added to group or not", () =>{
+    //window.prompt.mockClear();
+    //editsMenu.addToGroup(1);    
+    //console.log("Printing editor add:\n")
+    //console.log(editsMenu.edits)
+    //expect(editsMenu.edits[0].group).toBe("");
+//});//test if the editor is been added to the group or not
+
+it("Test if the editor is being undoed or not", () =>{
+    editsMenu.performEdits();
+    console.log("Printing editor undo:\n")
+    console.log(editsMenu.edits)
+    var edit = new Edit("", "Hello", 1)
+    expect(editor.history.stack.undo[0].undo.ops[0]["insert"]).toBe(edit.newContent);
+});//test if the editor is been undoed
+
+it("Test if the editor is being redoed or not", () =>{
+    editor.history.redo();
+    console.log("Printing editor undo:\n")
+    console.log(editsMenu.edits)
+    var edit = new Edit("Hello", "", 1)
+    expect(editsMenu.edits[0]).toMatchObject(edit);
+});//test if the editor is been redoed
+

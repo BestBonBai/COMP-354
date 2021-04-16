@@ -186,3 +186,8 @@ $(document).ready(function() {
     }
 
 });
+
+
+
+//set same height for div(editsMenu)
+$("#editsMenu").height($("#content-container").height());

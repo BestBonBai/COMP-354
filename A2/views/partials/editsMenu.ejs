@@ -1,7 +1,8 @@
 <div class="title">
     <h4>Edits Menu</h4>
 </div>
-<table class="table" id="editsMenu">
+<div class="title" id="editsMenu">
+<table class="table">
     <thead>
         <tr>
             <th class="title" scope="col">Ungrouped Edits</th>
@@ -17,5 +18,10 @@
     <tbody id="grouped-table-body">
     </tbody>
 </table>
-
+</div>
+<!-- action buttons -->
+<div class="title">
+    <button id="performEdits" class="btn btn-primary" onclick="editsMenu.performEdits()">Undo Selected Edit(s)</button>
+    <button id="deleteEdits" class="btn btn-primary" onclick="editsMenu.deleteEdits()">Delete Selected Edit(s)</button>
+</div>
 

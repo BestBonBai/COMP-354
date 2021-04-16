@@ -41,17 +41,19 @@ var options = {
                 "Brossard": "1",
                 "Ottawa": "1",
                 "Sherbrooke": "1",
-                "And": "1"
-            },
-            dicGroupSentence: {
-                "this is a group": "1",
-                "test 1": "1"
+                "Concordia": "2",
+                "University": "2",
+                "School": "2",
+                "College": "2",
+                "and": "3",
+                "with": "3",
+                "also": "3"
             }
 
-		},
-		editsMenu: {
-			container: '#editsMenu',
-		}
+        },
+        editsMenu: {
+            container: '#editsMenu',
+        }
     },
     placeholder: 'Start typing...',
     theme: 'snow'
