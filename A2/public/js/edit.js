@@ -6,4 +6,5 @@ class Edit {
         this.group = "";
         this.selected = false;
     }
+
 }

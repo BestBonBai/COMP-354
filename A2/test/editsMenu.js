@@ -113,7 +113,7 @@ export default class EditsMenu {
         this.edits[editNum-1].selected = true
         document.getElementById('deleteEdits').style.display = "inline-block"
         document.getElementById('performEdits').style.display = "inline-block"
-        document.getElementById(`edit${editNum}Selected`).style.display = "block"
+        //document.getElementById(`edit${editNum}Selected`).style.display = "block"
     }
 
     groupSelected(group) {
@@ -132,7 +132,7 @@ export default class EditsMenu {
                 //TODO: newline char bug
                 //TODO: bug when doing different edit when another edit has an old and new
                 this.quill.updateContents(undoItem.undo.ops)
-                document.getElementById(`edit${edit.number}Selected`).style.display = "none"
+                //document.getElementById(`edit${edit.number}Selected`).style.display = "none"
             }
         })
         document.getElementById('deleteEdits').style.display = "none"
