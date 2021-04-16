@@ -31,7 +31,7 @@
         "setupFilesAfterEnv": [
             "<rootDir>/testSetup.js",
             "<rootDir>/test/edit.js",
-            "<rootDir>/public/js/showGroup.js",
+            "<rootDir>/test/showGroup.js",
             "<rootDir>/public/js/counter.js",
             "<rootDir>/test/editsMenu.js"
         ]
