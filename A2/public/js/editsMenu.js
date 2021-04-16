@@ -81,7 +81,7 @@ class EditsMenu {
                                     </tr>`
             }
         })
-        this.groups.forEach(group => {
+        this.groups.forEach(group => { //grouped
             var groupHeader = `<tr>
                                     <th class="subtitle" scope="col">${group} <button class="btn btn-primary" value="${group}" style="float:right;" onclick="editsMenu.groupSelected(this.value)">Select All</button></th>
                                 </tr>`
@@ -147,6 +147,8 @@ class EditsMenu {
                         if (index > 0 && undoItem.undo.ops[index-1]['delete']) {
                             undoItem.undo.ops[index-1]['delete'] += 1
                         }
+                    } else if (edit.newContent.includes('\n') && op['retain'] == 1) {
+                        undoItem.undo.ops.splice(index, 1)
                     }
                 })
                 var lenEdit = 0
