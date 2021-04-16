@@ -5,5 +5,6 @@ export default class Edit {
         this.number = number;
         this.group = "";
         this.selected = false;
+        this.enabled = true;
     }
 }

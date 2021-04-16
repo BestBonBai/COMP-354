@@ -6,6 +6,8 @@ var click_undoByTime = document.getElementById("undoByTime_click");
 click_undoByTime.onclick = function() {
     console.log("Successful Undo By Timing...");
     editor.history.undo() ;
+    console.log("UNDO STACK in undo by time")
+    console.log(editor.history.stack.undo)
     editsMenu.edits = [];
     editsMenu.update();
 }

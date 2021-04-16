@@ -9,7 +9,6 @@ class EditsMenu {
         this.edits = []
         this.groups = []
     }
-    
     // Iterates through the undo and redo stacks located in the quill editor and populates the edits array
     populateEdits() {
         var redoStack = []
@@ -26,7 +25,7 @@ class EditsMenu {
                     newContent = edit['insert']
                     insertFlag = true
                 } else if (edit['retain'] != undefined) {
-
+                    
                 } else if (edit['delete'] != undefined && !insertFlag) {
                     newContent = ""
                 }
@@ -37,7 +36,7 @@ class EditsMenu {
                     oldContent = edit['insert']
                     insertFlag = true
                 } else if (edit['retain'] != undefined) {
-
+                    
                 } else if (edit['delete'] != undefined && !insertFlag) {
                     oldContent = ""
                 }
@@ -47,6 +46,12 @@ class EditsMenu {
                 this.edits[editNum-1].newContent = newContent
             } else { // create new edit
                 this.edits[editNum-1] = new Edit(oldContent, newContent, editNum)
+            }
+            var text = this.quill.getText();
+            if (!text.includes(this.edits[editNum-1].newContent)) {
+                this.edits[editNum-1].enabled = false
+            } else {
+                this.edits[editNum-1].enabled = true
             }
             insertFlag = false
             editNum++
@@ -68,7 +73,7 @@ class EditsMenu {
                                                     <h5 class="card-title">Edit ${edit.number}</h5>
                                                     <p id="editor_old1" class="card-text">Old: ${edit.oldContent}</p>
                                                     <p id="editor_new1" class="card-text">New: ${edit.newContent}</p>
-                                                    <button class="btn btn-primary" value="${edit.number}" onclick="editsMenu.editSelected(this.value)" >Select</button>
+                                                    <button class="btn btn-primary" id="edit${edit.number}Button" value="${edit.number}" onclick="editsMenu.editSelected(this.value)" >Select</button>
                                                     <button class="btn btn-primary" value="${edit.number}" onclick="editsMenu.addToGroup(this.value)" >Add To Group</button>
                                                 </div>
                                             </div>
@@ -91,7 +96,7 @@ class EditsMenu {
                                                         <h5 class="card-title">Edit ${edit.number}</h5>
                                                         <p id="editor_old1" class="card-text">Old: ${edit.oldContent}</p>
                                                         <p id="editor_new1" class="card-text">New: ${edit.newContent}</p>
-                                                        <button class="btn btn-primary" value="${edit.number}" onclick="editsMenu.editSelected(this.value)" >Select</button>
+                                                        <button class="btn btn-primary" id="edit${edit.number}Button" value="${edit.number}" onclick="editsMenu.editSelected(this.value)" >Select</button>
                                                         <button class="btn btn-primary" value="${edit.number}" onclick="editsMenu.addToGroup(this.value)" >Add To Group</button>
                                                     </div>
                                                 </div>
@@ -103,6 +108,17 @@ class EditsMenu {
         })
         $("#ungrouped-table-body").html(ungroupedContent)
         $("#grouped-table-body").html(allGroups)
+
+        // Disable edit if user has entered a new edit within another edit
+        this.edits.forEach(edit => { 
+            if (edit.enabled) {
+                console.log("Enabling edit..." + edit.number)
+                document.getElementById(`edit${edit.number}Button`).disabled = false
+            } else {
+                console.log("Disabling edit..." + edit.number)
+                document.getElementById(`edit${edit.number}Button`).disabled = true
+            }
+        })
     }
 
     editSelected(editNum) {
@@ -124,10 +140,29 @@ class EditsMenu {
         this.edits.slice().reverse().forEach(edit => {
             if (edit.selected) {
                 var undoItem = editor.history.stack.undo.splice(edit.number-1, 1)[0]
-                editor.history.stack.redo.unshift(undoItem)
-                //TODO: newline char bug
-                //TODO: bug when doing different edit when another edit has an old and new
-                editor.updateContents(undoItem.undo.ops)
+                // Handles cases when there are new lines in the edit
+                undoItem.undo.ops.forEach((op,index) => { 
+                    if (op['retain'] == 1 && (index+1) < undoItem.undo.ops.length && undoItem.undo.ops[index+1]['delete'] == 1) {
+                        undoItem.undo.ops.splice(index, 2)
+                        if (index > 0 && undoItem.undo.ops[index-1]['delete']) {
+                            undoItem.undo.ops[index-1]['delete'] += 1
+                        }
+                    }
+                })
+                var lenEdit = 0
+                if (undoItem.undo.ops[0]["delete"]) {
+                    lenEdit = undoItem.undo.ops[0]["delete"] 
+                }
+                var i;
+                for (i = edit.number-1; i < editor.history.stack.undo.length; i++) {
+                    editor.history.stack.undo[i].undo.ops[0]["retain"] -= lenEdit;
+                    if (editor.history.stack.undo[i].undo.ops[0]["retain"] == 0 ) {
+                        editor.history.stack.undo[i].undo.ops.splice(0, 1)
+                    }
+                }
+                editor.history.stack.undo.push(undoItem)
+                editor.history.undo()
+                console.log("Successful undo")
                 document.getElementById(`edit${edit.number}Selected`).style.display = "none"
             }
         })
@@ -141,8 +176,6 @@ class EditsMenu {
         this.edits.slice().reverse().forEach(edit => {
             if (edit.selected) {
                 editor.history.stack.undo.splice(edit.number-1, 1)
-                //TODO: newline char bug
-                //TODO: bug when doing different edit when another edit has an old and new
             }
         })
         $("#ungrouped-table-body").html('')
@@ -167,7 +200,6 @@ class EditsMenu {
             var shouldRemove = true
             this.edits.forEach(edit => {
                 if (edit.group == group) {
-
                     shouldRemove = false
                 }
             })
@@ -183,4 +215,3 @@ class EditsMenu {
 }
 
 Quill.register('modules/editsMenu', EditsMenu, true)
-
