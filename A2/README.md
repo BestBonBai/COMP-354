@@ -28,6 +28,7 @@ Need to set your broswer settings -> Downloads -> Open `Ask where to save each f
 
 ### Folder Structure
 The folder structure is in line with the usual folder structure for a nodejs app
+```
 A2
 +-- public
 |   +--css
@@ -44,7 +45,7 @@ A2
 |       +-- All necessary .ejs partial pages to be used in index.ejs
 +-- server.js - the server/backend code for the app
 +-- testsetup.js - Jest test setup file
-
+```
 ### Test Group words:
 Demo: city words:
 ```javascript
