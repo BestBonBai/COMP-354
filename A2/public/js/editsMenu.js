@@ -58,6 +58,12 @@ class EditsMenu {
         });
     }
 
+    updateEditNum() {
+        this.edits.forEach((edit, index) => {
+            edit.number = index + 1
+        })
+    }
+
     // updates the Edits Menu with all the edits in the edits array
     updateMenu() {
         var ungroupedContent = ""
@@ -97,7 +103,7 @@ class EditsMenu {
                                                         <p id="editor_old1" class="card-text">Old: ${edit.oldContent}</p>
                                                         <p id="editor_new1" class="card-text">New: ${edit.newContent}</p>
                                                         <button class="btn btn-primary" id="edit${edit.number}Button" value="${edit.number}" onclick="editsMenu.editSelected(this.value)" >Select</button>
-                                                        <button class="btn btn-primary" value="${edit.number}" onclick="editsMenu.addToGroup(this.value)" >Add To Group</button>
+                                                        <button class="btn btn-primary" value="${edit.number}" onclick="editsMenu.addToGroup(this.value)" >Change Group</button>
                                                     </div>
                                                 </div>
                                             </td>
@@ -168,9 +174,12 @@ class EditsMenu {
                 document.getElementById(`edit${edit.number}Selected`).style.display = "none"
             }
         })
+        this.edits = this.edits.filter(function(edit) {
+            return !edit.selected
+        })
+        this.updateEditNum()
         document.getElementById('deleteEdits').style.display = "none"
         document.getElementById('performEdits').style.display = "none"
-        this.edits = []
         this.update()
     }
     
@@ -180,16 +189,20 @@ class EditsMenu {
                 editor.history.stack.undo.splice(edit.number-1, 1)
             }
         })
+        this.edits = this.edits.filter(function(edit) {
+            return !edit.selected
+        })
+        this.updateEditNum()
         $("#ungrouped-table-body").html('')
         document.getElementById('deleteEdits').style.display = "none"
         document.getElementById('performEdits').style.display = "none"
-        this.edits = []
         this.update()
     }
     
     addToGroup(editNum) {
         var group = prompt("What group do you want to add this edit to?", "Group A")
         if (group == null || group == "") {
+            this.edits[editNum-1].group = ""
             return
         }
         this.edits[editNum-1].group = group
@@ -199,10 +212,13 @@ class EditsMenu {
 
     updateGroups() {
         this.groups.forEach((group, index) => {
+            console.log(group)
             var shouldRemove = true
             this.edits.forEach(edit => {
+                console.log("Edit:"+edit.newContent+" group:"+edit.group)
                 if (edit.group == group) {
                     shouldRemove = false
+                    console.log("Keep this group")
                 }
             })
             if (shouldRemove) { this.groups.splice(index, 1); }
